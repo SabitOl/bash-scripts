@@ -17,3 +17,21 @@ Run this in your terminal:
 */5 * * * * /root/path/to/your/ram-check.sh
 
 This auto runs the script every five minutes
+
+## 3. key-hunter.sh
+The script search for secrets or private keys in staging area before commit. When a keyword containing "Private key" or "AWS_SECRET_ACCESS_KEY" is found in a file about to be committed, the commit stops. And the file won't be committed.
+
+The script can be made to auto run on every commit by saving the script in .git/hooks/pre-commit.
+
+For instance, your initialized folder is "bash-scripts".
+
+You cd to the folder. Then:
+
+- nano .git/hooks/pre-commit
+- Save the key-hunter.sh content in pre-commit file
+
+The script auto runs first before a file is committed.
+
+You can adjust the search keyword in the script to the variable name you use to save private keys.
+
+
