@@ -29,14 +29,14 @@ jobs:
           # If the exit code is 0, the test passes
           # If the exit code is not 0, the test fails
           - name: Run disk-check
-             run: bash disk-check.sh
+            run: bash disk-check.sh
 
           # Step 4: Run key-hunter
           - name: Run key-hunter
-             run: bash key-hunter.sh
+            run: bash key-hunter.sh
 
           # Step 5: Run ram-check
           - name: Run ram-check
-             run: bash ram-check.sh
+            run: bash ram-check.sh
 
 
