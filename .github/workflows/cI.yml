@@ -21,21 +21,22 @@ on:
             uses: actions/checkout@v4
 
           # Step 2: Make all test scripts executable
-          # The runner is a fresh machine - it doesn't inherit permission from 
+          # The runner is a fresh machine
+          # it doesn't inherit permission from laptop
             run: chmod +x scripts/*.sh
 
           # Step 3: Run disk-check.sh and check its exit code
           # If the exit code is 0, the test passes
           # If the exit code is not 0, the test fails
           - name: Run disk-check
-             run: bash disk-check.sh
+             run: bash scripts/disk-check.sh
 
           # Step 4: Run key-hunter
           - name: Run key-hunter
-             run: bash key-hunter.sh
+             run: bash scripts/key-hunter.sh
 
           # Step 5: Run ram-check
           - name: Run ram-check
-             run: bash ram-check.sh
+             run: bash scripts/ram-check.sh
 
 
