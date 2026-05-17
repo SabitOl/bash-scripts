@@ -1,6 +1,6 @@
 name: Bash Scripts CI
 
-# This workflow runs every time code is pushed to main
+# This workflow runs every time code is pushed to main branch
 # and ever time a pull request targets main
 on:
 
