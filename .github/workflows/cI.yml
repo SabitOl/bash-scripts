@@ -21,7 +21,7 @@ on:
             uses: actions/checkout@v4
 
           # Step 2: Make all test scripts executable
-          # The runner is a fresh machine - it doesn't inherit permission from >
+          # The runner is a fresh machine - it doesn't inherit permission from 
             run: chmod +x scripts/*.sh
 
           # Step 3: Run disk-check.sh and check its exit code
