@@ -1,7 +1,7 @@
 name: Bash Scripts CI
 
 # This workflow runs every time code is pushed to main branch
-# and ever time a pull request targets main
+# and every time a pull request targets main
 on:
 
    push:
@@ -10,9 +10,29 @@ on:
      branches: [ main ]
 
 jobs:
+
+   lint:
+      run-on: ubuntu-latest
+      uses: actions/checkout@v4
+
+      # Steps 
+      steps:
+         # Install shellcheck to check for sytax errors and best practices in scripts
+         - name: Install shellcheck
+           run: sudo apt-get install -y -qq shellcheck
+
+         # Lint all shell scripts
+         - name: Lint all shell scripts
+         # "|" prints each lines separately (> this prints all in one line)
+           run: |
+              shellcheck *.sh
+              echo "All scripts passed shellcheck"
+      
    test-scripts:
       # Github provides a fresh Ubuntu virtual machine for this job
       runs-on: ubuntu-latest
+      # Only runs after all lint test passes
+      needs: lint
 
       steps:
           # Download the repository code onto the virtual machine
@@ -20,7 +40,7 @@ jobs:
           - name: Checkout repository
             uses: actions/checkout@v4
 
-          # Step 2: Make all test scripts executable
+          # Make all test scripts executable
           # The runner is a fresh machine
           # it doesn't inherit permission from laptop
           
@@ -28,18 +48,35 @@ jobs:
           - name: Make scripts excutable
             run: chmod +x *.sh
 
-          # Step 3: Run disk-check.sh and check its exit code
+          # Print info about this job          
+          - name: Print runner information
+            run: |
+              echo 'Runner environment'
+              echo " OS: $RUNNER_OS"
+              echo " Repository: $GITHUB_REPOSITORY"
+              echo " Triggered by: $GIHUB_ACTOR" 
+
+          # Run disk-check.sh and check its exit code
           # If the exit code is 0, the test passes
           # If the exit code is not 0, the test fails
           - name: Run disk-check
-            run: bash disk-check.sh
+            run: |
+              echo 'Running disk-check...'
+              bash disk-check.sh
+              echo "disk-check.sh completed successfully."
 
           # Step 4: Run key-hunter
           - name: Run key-hunter
-            run: bash key-hunter.sh
+            run: |
+              echo "Running key-hunter..."
+              bash key-hunter.sh
+              echo "key-hunter.sh completed successfully."
 
           # Step 5: Run ram-check
           - name: Run ram-check
-            run: bash ram-check.sh
+            run: |
+              echo "Running ram-check..."    
+              bash ram-check.sh
+              echo "ram-check.sh completed successfully."
 
 
