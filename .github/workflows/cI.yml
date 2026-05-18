@@ -12,11 +12,15 @@ on:
 jobs:
 
    lint:
-      run-on: ubuntu-latest
-      uses: actions/checkout@v4
+      runs-on: ubuntu-latest
 
       # Steps 
       steps:
+
+         # Checkout repository
+         - name: Checkout repository
+           uses: actions/checkout@v4
+
          # Install shellcheck to check for sytax errors and best practices in scripts
          - name: Install shellcheck
            run: sudo apt-get install -y -qq shellcheck
