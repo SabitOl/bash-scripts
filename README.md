@@ -1,5 +1,10 @@
 # Bash Automation Scripts
 
+[![Bash Scripts CI](https://github.com/SabitOl/bash-scripts/actions/workflows/cI.yml/badge.svg)](https://github.com/SabitOl/bash-scripts/actions/workflows/cI.yml)
+
+A collection of Linux automation scripts written in Bash.
+Each script solves a real system administration task.
+
 ## 1. disk-check.sh
 
 The script checks usage of every partitions in the system. When any of the disk space used is above 80%, the script prints a WARNING message with percent used by each partition.
